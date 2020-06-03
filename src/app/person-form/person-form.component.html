@@ -1,0 +1,33 @@
+<form (submit)="onSubmitForm(personForm)" #personForm="ngForm">
+  Name:<input
+    type="text"
+    name="name"
+    ngModel
+    required
+    minlength="3"
+    maxlength="10"
+    pattern="[a-zA-Z]*"
+    #name="ngModel"
+  /><br />
+  <div
+    *ngIf="name.invalid && (name.dirty || name.touched)"
+    class="alert alert-danger"
+  >
+    <div *ngIf="name.errors.required">
+      Name is required.
+    </div>
+    <div *ngIf="name.errors.minlength">
+      Name must be at least 3 characters long.
+    </div>
+    <div *ngIf="name.errors.pattern">
+      Name can have only a-z and A-Z.
+    </div>
+  </div>
+  <br />
+  Address:<textarea name="address" ngModel></textarea> <br /><br />Id:<input
+    type="text"
+    name="id"
+    ngModel
+  /><br /><br />
+  <input type="submit" [disabled]="!personForm.valid" value="Add Person" />
+</form>
